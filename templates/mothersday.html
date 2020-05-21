@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Cloud</title>
+		<link rel='stylesheet' href='../static/styles/md.css'>
+	</head>
+	<body>
+		<div id='add-button'>+</div>
+		<div id='upload-form'>
+			<div id='upload-box'>
+				<div id='x'>+</div>
+				<form method="post" enctype="multipart/form-data" id='upload'>
+					{{ image_form.csrf_token }}
+					<div id='upload-button'>
+						<div id='plus'>+</div>
+				    	{{ image_form.hidden_tag() }}
+						{{ image_form.files(class_='upload', id='file-input')}}
+				    </div>
+				    <input id="upload-file" placeholder="Choose a File" disabled="disabled" />
+				    <button id='submit'>Submit</button>
+				</form>
+			</div>
+		</div>
+		{% for date in images %}
+			<a href='/logout'><div class='date'>Happy Mothers Day!<hr class='underline'> </div></a>
+			<div class='writing'>
+				<div class='text'>
+					&nbsp &nbsp &nbsp &nbsp Thank You for being the best mother in the world and always being there for me 
+					to support and encourage me. Not even trying to be cringy or corney, but it
+					genuinly means a lot that you are always there for me even in my worst moments
+					and that I can rely on you. Also your food is amazing :p. Love You So Much -
+					<b>Pratim and Anahita</b>
+					<br>
+					<br>
+					Here Are Some Pictures to Enjoy <3
+					<div class='ps'>**ps you can always login and add more :)</div>
+				</div>
+			</div>
+			<div class='background'></div>
+			<img class='arrow' src='../static/misc/arrow.png'>
+		
+			<div class='images-wrapper'>
+				{% for id in images[date] %}
+					<a href='/image/{{email}}/{{id}}'>
+					<div class='image-wrapper'>
+						<div class='image' style='background-image: url("/image/{{email}}/{{id}}")'></div>
+					</div>
+					</a>
+				{% endfor %}
+			</div>
+		{% endfor %}
+		
+		<script src='../static/scripts/jquery.js'></script>
+		<script src='../static/scripts/upload.js'></script>
+		<script src='../static/scripts/index.js'></script>
+	</body>
+</html>

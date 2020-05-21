@@ -1,0 +1,7 @@
+{% macro render_field(field) %}
+  <div class="form-group">
+    <label for="exampleInputFile">File input</label>
+    {{ field(class_="form-control-file", type="file")}}
+  </div>
+
+{% endmacro %}

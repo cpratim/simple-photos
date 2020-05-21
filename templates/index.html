@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Cloud</title>
+		<link rel='stylesheet' href='../static/styles/index.css'>
+	</head>
+	<body>
+		<div id='add-button'>+</div>
+		<div id='upload-form'>
+			<div id='upload-box'>
+				<div id='x'>+</div>
+				<form method="post" enctype="multipart/form-data" id='upload'>
+					{{ image_form.csrf_token }}
+					<div id='upload-button'>
+						<div id='plus'>+</div>
+				    	{{ image_form.hidden_tag() }}
+						{{ image_form.files(class_='upload', id='file-input')}}
+				    </div>
+				    <input id="upload-file" placeholder="Choose a File" disabled="disabled" />
+				    <button id='submit'>Submit</button>
+				</form>
+			</div>
+		</div>
+		{% for date in images %}
+			<a href='/logout'><div class='date'>{{date}}<hr class='underline'> </div></a>
+
+			<div class='images-wrapper'>
+				{% for id in images[date] %}
+					<a href='/image/{{email}}/{{id}}'>
+					<div class='image-wrapper'>
+						<div class='image' style='background-image: url("/image/{{email}}/{{id}}")'></div>
+					</div>
+					</a>
+				{% endfor %}
+			</div>
+		{% endfor %}
+		
+		<script src='../static/scripts/jquery.js'></script>
+		<script src='../static/scripts/upload.js'></script>
+		<script src='../static/scripts/index.js'></script>
+	</body>
+</html>

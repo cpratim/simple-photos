@@ -34,29 +34,6 @@ def reverse_dict(d):
 	for key in keys: ret[key] = d[key]
 	return ret
 
-@app.route('/mothersday', methods=['GET', 'POST'])
-def mothersday():
-	if not 'logged_in' in session: return redirect(url_for('login'))
-	if not session['logged_in']: return redirect(url_for('login'))
-	email = session['email']
-	file = f'storage/{email}/data.json'
-	data = read_data(file)
-	images = reverse_dict(data)
-	from forms import ImageForm
-	image_form = ImageForm()
-	if image_form.validate_on_submit():
-		images = read_data(file)
-		for data in image_form.files.data:
-			filename = _id(10) + '.jpg'
-			data.save(f'storage/{email}/{filename}')
-			date = get_date()
-			if date in images: images[date].insert(0, filename)
-			else:
-				images[date] = []
-				images[date].insert(0, filename)
-		dump_data(file, images)
-		return redirect(url_for('mothersday'))
-	return render_template('mothersday.html', images=images, image_form=image_form, email=email)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
